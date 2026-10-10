@@ -1,0 +1,4 @@
+# Art & interaction contract
+Original cartoon art: warm ink #304a39, meadow #91c969, sand #f4d597, cream #fff8e7, coral #ec795e, teal #58bdb1. Rounded silhouettes, upper-left highlights, soft ground shadows. No external fonts or assets.
+Logical stage: 1280×720. Map: 960×576, 48-unit cells; DOM header/footer/sidebar outside the map. Path sketch: west → east to x216 → south to y408 → east to x504 → north to y168 → east to x744 → south to y456 → east gate. Decorations reserved independently of path. Pointer placement; 1/2/3 tower selection; Escape/right click cancel; Space start; P pause. DOM controls never overlap map input. Portrait displays rotate prompt.
+SVG units use centered origins; tower/enemy files 80×80, map 960×576. Asset IDs are semantic, resolved only in presentation.
