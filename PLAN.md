@@ -236,19 +236,19 @@ Asset and sound work can be parallelized after the playable gate; no full-conten
 
 ## 7. Validation Strategy
 Release acceptance checklist:
-- [ ] Phaser 3, TypeScript, and Vite are used with a reproducible install/build.
-- [ ] A tested three-wave playable milestone predates feature expansion.
-- [ ] One coherent final map includes a readable route and accurate legal build areas.
-- [ ] Three mechanically distinct towers have two purchasable upgrades each.
-- [ ] Exactly ten authored waves progress to victory; losing all lives produces defeat.
-- [ ] Placement previews show footprint, range, affordability, and rejection reasons without spending money.
-- [ ] Enemies animate; all towers have projectile and hit effects; visual feedback remains readable.
-- [ ] Sound controls work, persist, and do not block play when audio fails.
-- [ ] Pause, hidden-tab handling, cancellation, terminal overlays, and restart work reliably.
-- [ ] Gameplay modules import neither Phaser nor browser APIs and pass headless tests.
-- [ ] Assets can be replaced through the documented manifest/frame contract without rewriting gameplay logic.
+- [x] Phaser 3, TypeScript, and Vite are used with a reproducible install/build.
+- [x] A tested three-wave playable milestone predates feature expansion.
+- [x] One coherent final map includes a readable route and accurate legal build areas.
+- [x] Three mechanically distinct towers have two purchasable upgrades each.
+- [x] Exactly ten authored waves progress to victory; losing all lives produces defeat.
+- [x] Placement previews show footprint, range, affordability, and rejection reasons without spending money.
+- [x] Enemies animate; all towers have projectile and hit effects; visual feedback remains readable.
+- [x] Sound controls work, persist, and do not block play when audio fails.
+- [x] Pause, hidden-tab handling, cancellation, terminal overlays, and restart work reliably.
+- [x] Gameplay modules import neither Phaser nor browser APIs and pass headless tests.
+- [x] Assets can be replaced through the documented manifest/frame contract without rewriting gameplay logic.
 - [ ] Full-session manual results, automated checks, browser coverage, and measured performance are recorded.
-- [ ] Production preview has no missing assets or uncaught errors; licenses and README are complete.
+- [x] Production preview has no missing assets or uncaught errors; licenses and README are complete.
 
 ## 8. Effort Summary
 - **Sizing guide:** S ≈ 0.25–0.5 developer-day; M ≈ 1–2 days; L ≈ 2–4 days. Includes per-step tests; estimates depend on existing tooling and art capability.
@@ -256,3 +256,9 @@ Release acceptance checklist:
 - **Critical path:** 1.1 → max(1.2, 1.3) → 2.1 → 2.2 → 2.3 → max(3.1→3.2, 3.3, 4.1) → 4.2 → 5.1 → 5.2 → 5.3. Steps 4.3 and 4.4 must also finish before 5.1 and may become critical if delayed.
 - **Milestones:** M1 foundation boots; M2 verified small playable slice; M3 all ten waves and three upgradable towers; M4 final visual/audio integration; M5 balanced, tested production build.
 - **Scope protection:** If time runs short, simplify decorative density and animation variants. Do not remove required tower roles, ten waves, upgrades, clear previews, audio controls, hit feedback, or the playable-slice test gate.
+
+## 9. Implementation Progress — 2026-10-10
+
+Phases 1–4 are implemented; the three-wave gate is preserved at `playable-slice` (`ea62f90`). Phase 5 automation and packaging now include 18 headless tests, 19 Chromium/Firefox/production browser checks, an isolated clean lockfile install/build, subdirectory asset verification, and a root-path `dist/` build. Browser QA caught and fixed a particle-expiry crash, paused audio unlocking, keyboard button interference, and reduced-motion flashes.
+
+Step 5.1 remains pending human playtests. Step 5.2 has automated Chromium/Firefox coverage but still needs Safari, actual devices, final-wave/laptop profiling, and long-session memory checks. Step 5.3 documentation/build/CI are implemented; release archival and deployment remain pending. See [docs/QA.md](docs/QA.md) for evidence, measured frame intervals, scripted balance results, and the remaining checklist. Checked acceptance items indicate implemented behavior with the documented automated coverage; they do not imply human balance or device certification.
