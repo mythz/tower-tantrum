@@ -3,12 +3,17 @@ import {levels} from '../../src/game/data/levels';
 import {enemies,towers,validateDefinitions} from '../../src/game/data/definitions';
 import {buildable,center,distance,lengthOf,position} from '../../src/game/data/map';
 import {applyCommand,createGame,enemyHealth,stars,stepGame} from '../../src/game/core/simulation';
+import {mapSvg,themes} from '../../src/game/presentation/mapArt';
 import type {EnemyKind,TowerKind} from '../../src/game/core/types';
 const cells=Array.from({length:240},(_,i)=>({x:i%20,y:Math.floor(i/20)}));
-it('provides six themed maps with valid lanes, reserved scenery and boss finales',()=>{
- expect(levels).toHaveLength(6);expect(new Set(levels.map(l=>l.map.visual)).size).toBe(6);
+it('provides eleven themed maps with valid lanes, reserved scenery and boss finales',()=>{
+ expect(levels).toHaveLength(11);expect(new Set(levels.map(l=>l.map.visual)).size).toBe(11);
  console.log('BUILD SPACE',levels.map(l=>cells.filter(c=>buildable(c,l.map)).length));
- for(const l of levels){validateDefinitions(l.waves);for(const [i,path] of l.map.paths.entries()){expect(path[0].x).toBeLessThan(0);expect(path.at(-1)!.x).toBeGreaterThan(960);expect(position(lengthOf(l.map,i),l.map,i)).toEqual(path.at(-1));}
+ for(const l of levels){validateDefinitions(l.waves);
+  expect(themes[l.map.visual]).toBeDefined();expect(mapSvg(l.map)).not.toMatch(/undefined|NaN/);
+  expect(cells.filter(c=>buildable(c,l.map)).length).toBeGreaterThan(150);
+  for(const path of l.map.paths)for(let i=1;i<path.length;i++){expect(distance(path[i-1],path[i])).toBeGreaterThan(0);expect(path[i-1].x===path[i].x||path[i-1].y===path[i].y).toBe(true);}
+for(const [i,path] of l.map.paths.entries()){expect(path[0].x).toBeLessThan(0);expect(path.at(-1)!.x).toBeGreaterThan(960);expect(position(lengthOf(l.map,i),l.map,i)).toEqual(path.at(-1));}
   for(const key of l.map.reserved){const [x,y]=key.split(',').map(Number);expect(buildable({x,y},l.map)).toBe(false);}
   expect(l.waves.at(-1)!.groups.some(g=>enemies[g.kind].boss)).toBe(true);}
  expect(levels.some(l=>l.map.paths.length>1)).toBe(true);
@@ -28,6 +33,6 @@ export function autoplay(level:number,mix:TowerKind[]=['pea','berry','frost','za
  }
  return s;
 }
-it.each([0,1,2,3,4,5])('level %s can be defended with upgrades and a mixed army',level=>{
+it.each(levels.map((_,i)=>i))('level %s can be defended with upgrades and a mixed army',level=>{
  const s=autoplay(level);console.log('BALANCE',level,levels[level].name,s.phase,`${s.lives}/${s.config.lives}`,`wave ${s.wave}/${s.config.waves.length}`,`towers ${s.towers.length}`,`stars ${stars(s)}`);expect(s.phase).toBe('won');
 });

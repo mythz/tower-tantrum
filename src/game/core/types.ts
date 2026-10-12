@@ -2,7 +2,7 @@ export type TowerKind = 'pea' | 'berry' | 'frost' | 'zap' | 'sun';
 export type EnemyKind = 'wobbler' | 'dasher' | 'chunky' | 'bubble' | 'mender' | 'splitter' | 'jellet' | 'captain' | 'baron' | 'duchess' | 'king';
 export type Targeting = 'first' | 'last' | 'strong' | 'close';
 export type Ability = 'bomb' | 'chill';
-export type Theme = 'meadow' | 'orchard' | 'canyon' | 'fjord' | 'volcano' | 'citadel';
+export type Theme = 'meadow' | 'orchard' | 'canyon' | 'fjord' | 'volcano' | 'citadel' | 'lagoon' | 'grove' | 'dunes' | 'glacier' | 'astral';
 export interface Point { x:number; y:number }
 /** Per-level tower values. `splash` doubles as chain-jump radius for zap; `pierce` ignores that much armor. */
 export interface Stats { damage:number; range:number; cooldown:number; speed:number; splash:number; slow:number; duration:number; cost:number; chain:number; pierce:number }

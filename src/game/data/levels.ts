@@ -9,6 +9,11 @@ const canyon=route('canyon',[[[-1,5],[5,5],[5,1],[9,1],[9,10],[14,10],[14,4],[20
 const fjord=route('fjord',[[[-1,2],[6,2],[6,5],[12,5],[12,8],[20,8]],[[-1,9],[8,9],[8,5],[12,5],[12,8],[20,8]]],[...block(14,1,4,3),...block(1,5,2,2),...block(9,10,2,2),...block(16,10,3,2)]);
 const volcano=route('volcano',[[[-1,1],[7,1],[7,4],[16,4],[16,6],[20,6]],[[-1,10],[10,10],[10,7],[16,7],[16,6],[20,6]]],[...block(2,5,2,2),...block(12,0,3,2),...block(13,9,3,2),...block(18,0,2,2),...block(18,10,2,2)]);
 const citadel=route('citadel',[[[-1,6],[3,6],[3,2],[8,2],[8,9],[12,9],[12,2],[17,2],[17,6],[20,6]]],[...block(9,4,2,3),...block(0,0,2,2),...block(0,10,2,2),...block(14,9,3,2),...block(5,5,2,1)]);
+const lagoon=route('lagoon',[[[-1,3],[4,3],[4,8],[10,8],[10,3],[16,3],[16,7],[20,7]],[[-1,9],[4,9],[4,8],[10,8],[10,3],[16,3],[16,7],[20,7]]],[...block(6,4,3,2),...block(12,9,3,2),...block(0,0,2,2),...block(18,1,2,2)]);
+const grove=route('grove',[[[-1,6],[3,6],[3,2],[7,2],[7,9],[12,9],[12,2],[16,2],[16,6],[20,6]]],[...block(0,0,2,2),...block(9,4,2,3),...block(18,9,2,2),...block(4,10,2,2),...block(14,7,2,1)]);
+const dunes=route('dunes',[[[-1,2],[5,2],[5,6],[11,6],[11,9],[16,9],[16,5],[20,5]],[[-1,10],[7,10],[7,6],[11,6],[11,9],[16,9],[16,5],[20,5]]],[...block(1,5,3,2),...block(8,1,3,2),...block(13,3,2,2),...block(18,9,2,2)]);
+const glacier=route('glacier',[[[-1,1],[4,1],[4,5],[10,5],[10,8],[16,8],[16,5],[20,5]],[[-1,10],[4,10],[4,7],[10,7],[10,8],[16,8],[16,5],[20,5]]],[...block(6,1,3,2),...block(12,2,3,2),...block(6,10,2,2),...block(18,9,2,2)]);
+const astral=route('astral',[[[-1,3],[3,3],[3,8],[8,8],[8,2],[13,2],[13,9],[17,9],[17,6],[20,6]],[[-1,10],[3,10],[3,8],[8,8],[8,2],[13,2],[13,9],[17,9],[17,6],[20,6]]],[...block(0,0,2,2),...block(5,4,2,2),...block(10,5,2,2),...block(15,0,3,2),...block(18,2,2,2)]);
 /** A tiered campaign: the same teaching arc as the meadow, denser and mixed with every grump type, ending in a boss. */
 function campaign(tier:number,length:number,finale:Wave,mid:EnemyKind):Wave[] {
  const c=(n:number)=>Math.ceil(n*(1+.22*tier)), sp=(s:number)=>Math.max(24,s-6*tier);
@@ -38,5 +43,10 @@ export const levels:LevelDefinition[]=[
  {name:'Caramel Canyon',subtitle:'Short road. Long odds.',difficulty:'Canyon · Expert',map:canyon,waves:campaign(2,12,finale('Swarm Duchess',2,[g('duchess',1,1,850)]),'captain'),coins:260,lives:16,healthScale:1.7,speedScale:1.1},
  {name:'Frosting Fjord',subtitle:'Two roads diverged. Both are angry.',difficulty:'Fjord · Expert',map:fjord,waves:campaign(2,14,finale('Twin Barons',2,[g('baron',2,700,850)]),'baron'),coins:300,lives:16,healthScale:1.6,speedScale:1.1},
  {name:'Fondue Volcano',subtitle:'Things are heating up.',difficulty:'Volcano · Master',map:volcano,waves:campaign(3,14,finale('Royal Eruption',3,[g('duchess',1,1,850),g('baron',1,1,1500)]),'baron'),coins:340,lives:15,healthScale:1.45,speedScale:1.12},
- {name:'Licorice Citadel',subtitle:'The king of all tantrums.',difficulty:'Citadel · Nightmare',map:citadel,waves:campaign(3,15,finale('King Cataclysm',3,[g('king',1,1,850),g('duchess',1,1,1600)]),'baron'),coins:380,lives:15,healthScale:2.2,speedScale:1.15}
+ {name:'Licorice Citadel',subtitle:'The king of all tantrums.',difficulty:'Citadel · Nightmare',map:citadel,waves:campaign(3,15,finale('King Cataclysm',3,[g('king',1,1,850),g('duchess',1,1,1600)]),'baron'),coins:380,lives:15,healthScale:2.2,speedScale:1.15},
+ {name:'Marshmallow Lagoon',subtitle:'Sweet shores. Sour company.',difficulty:'Lagoon · Master',map:lagoon,waves:campaign(3,15,finale('Tidal Tantrum',3,[g('duchess',2,800,850)]),'baron'),coins:420,lives:15,healthScale:1.8,speedScale:1.12},
+ {name:'Pistachio Grove',subtitle:'Deep roots. Deeper trouble.',difficulty:'Grove · Nightmare',map:grove,waves:campaign(4,15,finale('The Thorn Crown',4,[g('king',1,1,850),g('baron',2,650,1400)]),'baron'),coins:460,lives:15,healthScale:2.2,speedScale:1.15},
+ {name:'Honeycomb Dunes',subtitle:'Two trails through a sugar storm.',difficulty:'Dunes · Nightmare',map:dunes,waves:campaign(4,15,finale('The Golden Swarm',4,[g('duchess',2,750,850),g('baron',1,1,1700)]),'baron'),coins:500,lives:15,healthScale:2,speedScale:1.16},
+ {name:'Peppermint Glacier',subtitle:'Cold paths. Hot tempers.',difficulty:'Glacier · Legendary',map:glacier,waves:campaign(4,15,finale('Deep Freeze',4,[g('king',1,1,850),g('duchess',1,1,1600)]),'baron'),coins:540,lives:15,healthScale:2.1,speedScale:1.18},
+ {name:'Starlight Confection',subtitle:'One last stand among the sugar stars.',difficulty:'Astral · Legendary',map:astral,waves:campaign(5,15,finale('The Cosmic Crown',5,[g('king',2,1000,850),g('duchess',2,850,1700)]),'baron'),coins:580,lives:15,healthScale:2.4,speedScale:1.2}
 ];

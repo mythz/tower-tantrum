@@ -127,3 +127,30 @@ test('new towers, targeting, selling, speed, early calls and powers work from th
  await page.locator('#ability-bomb').click();await expect(page.locator('#ability-bomb')).toHaveClass(/armed/);await at(130,168);await expect(page.locator('#ability-bomb')).toBeDisabled();
  await page.screenshot({path:'test-results/powers.png'});expect(errors).toEqual([]);
 });
+
+test('five new lands render, restart and advance through the campaign',async({page})=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await boot(page);
+ await expect(page.locator('#level-select option')).toHaveCount(11);
+ const added=[
+  {index:6,name:'Marshmallow Lagoon',coins:420},
+  {index:7,name:'Pistachio Grove',coins:460},
+  {index:8,name:'Honeycomb Dunes',coins:500},
+  {index:9,name:'Peppermint Glacier',coins:540},
+  {index:10,name:'Starlight Confection',coins:580}
+ ];
+ for(const level of added){
+  await page.locator('#level-select').selectOption(String(level.index));
+  await expect(page.locator('#coins')).toHaveText(String(level.coins));
+  await expect(page.locator('#wave')).toHaveText('0 / 15');
+  await page.locator('#start').click();await expect(page.locator('#phase')).toHaveText('GRUMPS INBOUND');
+  await page.locator('#pause').click();await page.locator('#restart').click();
+  await expect(page.locator('#level-select')).toHaveValue(String(level.index));
+  await expect(page.locator('#coins')).toHaveText(String(level.coins));
+  await page.screenshot({path:`test-results/level-${level.index+1}.png`,fullPage:true});
+  await page.evaluate(()=>window.tantrumTest!.finish(true));
+  await expect(page.locator('#overlay')).toContainText(`15 waves defended in ${level.name}`);
+  if(level.index<10){await page.locator('#next-level').click();await expect(page.locator('#level-select')).toHaveValue(String(level.index+1));}
+  else {await expect(page.locator('#next-level')).toHaveCount(0);await page.locator('#restart').click();}
+ }
+ expect(errors).toEqual([]);
+});

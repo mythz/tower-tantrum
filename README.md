@@ -1,5 +1,5 @@
 # Tower Tantrum
-A colorful, locally bundled Phaser **3.90** tower-defense game. Defend six themed lands (77 waves) with Pea Poppers, splash-firing Boom Berries, slowing Frosty Cones, chain-lightning Zappy Zinnias and armor-piercing Sunbeam Snipers. Towers aim, recoil and grow through three visual tiers; grumps shield, heal, split and summon; two powers, early wave calls, 1–3× speed and star ratings keep every run lively.
+A colorful, locally bundled Phaser **3.90** tower-defense game. Defend eleven themed lands (152 waves) with Pea Poppers, splash-firing Boom Berries, slowing Frosty Cones, chain-lightning Zappy Zinnias and armor-piercing Sunbeam Snipers. Towers aim, recoil and grow through three visual tiers; grumps shield, heal, split and summon; two powers, early wave calls, 1–3× speed and star ratings keep every run lively.
 
 ## Run
 Node 22+ (tested here on Node 26). Dependencies are pinned in package.json and package-lock.json.
