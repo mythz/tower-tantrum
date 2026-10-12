@@ -86,8 +86,10 @@ test('blocked optional audio does not stop combat',async({page})=>{
   await page.mouse.click(box.x+box.width*120/960,box.y+box.height*264/576);
   await page.locator('#start').click();
   const tick=await page.evaluate(()=>window.tantrumTest!.snapshot().tick);
-  await page.waitForTimeout(1200);
-  expect(await page.evaluate(()=>window.tantrumTest!.snapshot().tick)).toBeGreaterThan(tick+30);
+  // Wait for combat progress rather than assuming a frame rate on CI runners.
+  await expect.poll(()=>page.evaluate(()=>window.tantrumTest!.snapshot().tick),{
+    timeout:10_000,
+  }).toBeGreaterThan(tick+30);
   expect(errors).toEqual([]);
 });
 
